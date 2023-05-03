@@ -1,0 +1,784 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>LEARN THE BASICS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="44d34210-ec7b-427d-b78f-1f994d943795" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏷️</span></div><h1 class="page-title"><strong>LEARN THE BASICS</strong></h1></header><div class="page-body"><p id="3daa581c-ad06-4c2b-b10c-c6f6a0eeacf7" class="">
+</p><p id="2ca3a897-c25f-4a89-b5c3-7832912ed4c4" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3"><strong>DATASET and DATALOADERc</strong></summary><div class="indented"><p id="7c1cfefb-9190-4c50-852d-9ab3df1e1b3c" class=""><code>torch.utils.data.DataLoader</code><strong>와 </strong><code>torch.utils.data.Dataset</code><strong>의 두 가지 데이터 기본 요소를 제공
+미리 준비해둔(pre-loaded) 데이터셋 뿐만 아니라 가지고 있는 데이터를 사용 가능
+</strong><code>Dataset</code><strong> 은 샘플과 정답(label)을 저장하고,
+</strong><code>DataLoader</code><strong>는 </strong><code>Dataset</code><strong>을 샘플에 쉽게 접근할 수 있도록 순회 가능한 객체(iterable)로 감쌈</strong></p><p id="16bbddb0-9880-4989-9dba-c82bcecde213" class=""><mark class="highlight-red"><a href="https://pytorch.org/vision/stable/datasets.html">이미지 데이터셋</a></mark><mark class="highlight-red"><strong>, </strong></mark><mark class="highlight-red"><a href="https://pytorch.org/text/stable/datasets.html">텍스트 데이터셋</a></mark><mark class="highlight-red"><strong> 및 </strong></mark><mark class="highlight-red"><a href="https://pytorch.org/audio/stable/datasets.html">오디오 데이터셋</a></mark></p><p id="f6d68360-b97d-49d8-880e-c475dec50554" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Example : Fashion-MNIST in torchvision</summary><div class="indented"><h3 id="6f980205-06f9-46f8-bb8c-0fedd7b81542" class="">데이터 불러오기</h3><ul id="8324dea4-4872-4dad-be19-a9c1ad3c7ea1" class="bulleted-list"><li style="list-style-type:disc"><code><strong>root</strong></code><strong> 는 학습/테스트 데이터가 저장되는 경로</strong></li></ul><ul id="81e8862a-7699-4506-bd98-8e8d3e75ad1c" class="bulleted-list"><li style="list-style-type:disc"><code><strong>train</strong></code><strong> 은 학습용 또는 테스트용 데이터셋 여부를 지정</strong></li></ul><ul id="115b08b0-b76c-4481-b369-ab543c9f49c4" class="bulleted-list"><li style="list-style-type:disc"><code><strong>download=True</strong></code><strong> 는 </strong><code><strong>root</strong></code><strong> 에 데이터가 없는 경우 인터넷에서 다운로드</strong></li></ul><ul id="624d1918-aa7a-4164-9df1-b80eb084af20" class="bulleted-list"><li style="list-style-type:disc"><code><strong>transform</strong></code><strong> 과 </strong><code><strong>target_transform</strong></code><strong> 은 feature와 label 변형(transform)을 지정</strong></li></ul><pre id="82daa803-ad16-4016-966d-17ebfa3ffa74" class="code"><code>import torch
+from torch.utils.data import Dataset
+from torchvision import datasets
+from torchvision.transforms import ToTensor
+import matplotlib.pyplot as plt
+
+taining_data = datasets.FashionMNIST(
+	root:&#x27;data&#x27;,
+	train=True,
+	download=True,
+	transform=ToTensor()
+)
+test_data = datasets.FasionMNIST(
+	root:&#x27;data&#x27;,
+	train=True,
+	download=True,
+	transform=ToTensor()
+)</code></pre><h3 id="7cc7d802-64e0-47ec-b86c-005517b06376" class="">데이터셋을 순회하고 시각화하기</h3><p id="b2639177-3a01-4120-ad1b-c10e1c25053c" class=""><code>Dataset</code><strong> 에 리스트(list)처럼 직접 접근(index) 가능</strong></p><pre id="cb6b8198-d398-4033-960b-02f20e9e7403" class="code"><code>labels_map = {
+	0 : &quot;T-Shirt&quot;
+	1 : &quot;Trouser&quot;
+	2 : &quot;Pullover&quot;
+	3 : &quot;Dress&quot;
+	4 : &quot;Coat&quot;
+	5 : &quot;Sandal&quot;
+	6 : &quot;Shirt&quot;
+	7 : &quot;neaker&quot;
+	8 : &quot;Bag&quot;
+	9 : &quot;Ankle Boot&quot;
+}
+figure = plt.figure(figsize=(8,8))
+cols, rows = 3, 3
+for i in range(1, cols * rows + 1):
+	sample_idx = torch.randint(len(training_data), size=(1,)).item()
+  img, label = training_data[sample_idx]
+  figure.add_subplot(rows, cols, i)
+  plt.title(labels_map[label])
+  plt.axis(&quot;off&quot;)
+  plt.imshow(img.squeeze(), cmap=&quot;gray&quot;)
+plt.show()</code></pre><h3 id="61fc819f-6a4f-41f1-8c48-fae86e77ecc4" class="">파일에서 사용자 정의 데이터셋 만들기</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="41f0d517-ab23-4cff-94bf-5e42b1cb92af"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><mark class="highlight-red"><strong>사용자 정의 Dataset 클래스는 반드시 3개 함수를 구현해야 함</strong></mark><p id="b45d4726-7e00-4aa7-908b-4c67d7a89638" class=""><mark class="highlight-red"><strong>__init__, __len__, __getitem__.</strong></mark></p></div></figure><p id="26777b2d-93c3-44f6-8395-07b7689bbda8" class=""><strong>FashionMNIST 이미지들은 </strong><code>img_dir</code><strong> 디렉토리에 저장되고, 
+정답은 </strong><code>annotations_file</code><strong> csv 파일에 별도로 저장</strong></p><blockquote id="863f8757-7e1c-4547-9486-c87d82e9e26d" class=""><strong>labels.csv 파일</strong><pre id="1a511676-d66a-4279-8519-951dc85c01be" class="code code-wrap"><code>tshirt1.jpg, 0
+tshirt2.jpg, 0
+......ankleboot999.jpg, 9</code></pre></blockquote><pre id="52807167-57e6-4e49-9082-1c80c74364ad" class="code"><code>import os
+import pandas as pd
+from torchvision.io import read_image
+
+class CustomImageDataset(Dataset):
+	def __init__ (self, annotation_files, img_dir,
+								transform=None, target_transform=None) : 
+		self.img_labels = pd.read.csv(annotations_file, names = [&#x27;file_name&#x27;, &#x27;label&#x27;]
+		self.img_dir = img_dir
+		self.transform = transform
+		self.target_transform = target_transform
+	
+	def __len__ (self)
+		return len(self.labels)
+
+	def __getitem__(self, idx) :
+		img_path = os.path.join(self.img_dir, self.img_labels.iloc[idx.0])
+		image = read_image(img_path)
+		label = self.img_labels.iloc[idx, 1]
+		if self.transform :
+			image = self.transform(image)
+		if self.target_transform :
+			label = self.target_transform(label)
+		retrun image, label</code></pre><ul id="d3c2f0f6-9908-467e-9b17-e4987b930121" class="bulleted-list"><li style="list-style-type:disc">__<strong>init</strong>__<ul id="7f158b61-02ef-4d95-adbc-87c24aade3a6" class="bulleted-list"><li style="list-style-type:circle"><strong>이미지 디렉토리 및 주석파일 (annotation_file)의 변형을 초기화(transform)</strong></li></ul></li></ul><ul id="552a85ff-8d93-4958-b6d0-d42ceccd81d8" class="bulleted-list"><li style="list-style-type:disc">__<strong>len</strong>__<ul id="1a41c3f8-7825-4428-86e3-2289adae8b54" class="bulleted-list"><li style="list-style-type:circle"><strong>데이터 셋의 샘플 개수 반환</strong></li></ul></li></ul><ul id="d2f95c16-3e81-4ce1-90e4-dc2e459c2643" class="bulleted-list"><li style="list-style-type:disc">__<strong>getitem</strong>__<ul id="8fae6dba-8fce-498f-b8d0-be1f546d64bb" class="bulleted-list"><li style="list-style-type:circle"><strong>주어진 인덱스 </strong><code>idx</code><strong> 에 해당하는 샘플을 데이터셋에서 불러오고 반환</strong></li></ul><ul id="da6f0a2a-db29-485c-b145-5fba4b6664ab" class="bulleted-list"><li style="list-style-type:circle"><code>read_image</code><strong> 를 사용하여 이미지를 텐서로 변환</strong></li></ul><ul id="4ee970b4-3ffd-40a6-857a-c78014d2cd47" class="bulleted-list"><li style="list-style-type:circle"><code>self.img_labels</code><strong> 의 csv 데이터로부터 해당하는 정답(label) 도출</strong></li></ul><ul id="83af068e-a9d8-420e-ba8b-f2cbe02d43c1" class="bulleted-list"><li style="list-style-type:circle"><strong>해당하는 경우 변형(transform) 함수들을 호출</strong></li></ul><ul id="3aebbd2a-4fe5-4fd9-af8f-000b56ca8d6c" class="bulleted-list"><li style="list-style-type:circle"><strong>텐서 이미지와 라벨을 Python 사전(dict)형으로 반환</strong></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3"><strong>DataLoader로 학습용 데이터 준비하기</strong></summary><div class="indented"><p id="b1c600bb-8fac-4a55-8a7f-0e456e9ac493" class="">모<strong>델을 학습할 때, 일반적으로 샘플들을 《미니배치(minibatch)》로 전달,
+매 에폭(epoch)마다 데이터를 다시 섞어서 과적합(overfit)을 막고,
+Python의 </strong><code>multiprocessing</code><strong> 을 사용하여 데이터 검색 속도를 높임.</strong></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5f4d140d-3a85-4871-80e7-13abab8dafe9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><code>DataLoader </code><strong>간단한 API로 이러한 복잡한 과정들을 
+추상화한 순회 가능한 객체(iterable)</strong></div></figure><pre id="1d52c068-e144-4021-9afb-e881db7ca715" class="code"><code>from torch.utils.data import DataLoader
+
+train_dataloader = DataLoader(training_data, batch_size=64, shuffle=True)
+test_dataloader = DataLoader(test_data, batch_size=64, shuffle=True)</code></pre><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">DataLoadr를 통해 순회하기 (iterate)</summary><div class="indented"><p id="471a1548-888e-4116-a785-4070b8312bd2" class=""><code>DataLoader</code><strong> 에 데이터셋을 불러온 뒤에는 필요에 따라 데이터셋을 순회(iterate) 가능</strong></p><blockquote id="031bb4e9-2e90-4b13-ba1e-5869b372d553" class=""><strong>각 순회(iteration)는 
+(각각 </strong><code>batch_size=64</code><strong> 의 특징(feature)과 정답(label)을 포함하는) </strong><code>train_features</code><strong> 
+&amp; </strong><code>train_labels</code><strong> 의 묶음(batch)을 반환</strong></blockquote><p id="b6aaa19b-21bb-456d-bc5f-09d723ed4df7" class=""><code>shuffle=True</code><strong> 로 지정했으므로, 모든 배치를 순회한 뒤 데이터가 섞임</strong></p><p id="fb4cad04-a002-4365-9aba-b648744763fc" class=""><strong>데이터 불러오기 순서를 보다 세밀하게(finer-grained) 제어하려면 </strong><strong><mark class="highlight-red"><a href="https://pytorch.org/docs/stable/data.html#data-loading-order-and-sampler">Samplers</a></mark></strong></p><pre id="4db1a72c-7261-4f95-8a32-c17d14c2e9af" class="code"><code># 이미지와 정답(label)을 표시합니다.
+train_features, train_labels = next(iter(train_dataloader))
+print(f&quot;Feature batch shape: {train_features.size()}&quot;)
+print(f&quot;Labels batch shape: {train_labels.size()}&quot;)
+img = train_features[0].squeeze()
+label = train_labels[0]
+plt.imshow(img, cmap=&quot;gray&quot;)
+plt.show()
+print(f&quot;Label: {label}&quot;)</code></pre><p id="113441a6-7f50-41df-9e34-61d6b5ce21f8" class="">
+</p><p id="03d980d6-1c6c-4c0d-9cb4-89a944ab2804" class="">
+</p></div></details><p id="0689a599-dbde-4a7e-88c6-f6994f43aa12" class="">
+</p></div></details></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3">TRANSFORM</summary><div class="indented"><p id="27e7717c-0010-4481-96f4-da98928e76a8" class=""><strong>데이터가 항상 머신러닝 알고리즘 학습에 필요한 최종 처리가 된 형태로 제공되지는 않음</strong></p><p id="d37e2f40-7f3a-4764-850d-954c57fda730" class=""><mark class="highlight-red"><strong><a href="https://pytorch.org/vision/stable/transforms.html">torchvision.transforms</a></strong></mark><mark class="highlight-red"><strong> </strong></mark><strong>모듈은 주로 사용하는 몇가지 변형(transform)을 제공</strong></p><blockquote id="67c03674-f43c-4b01-9b62-15933779505f" class=""><strong>변형 로직을 갖는, 호출 가능한 객체(callable)를 받는 매개변수 두개 
+(특징(feature)을 변경하기 위한 </strong><code>transform</code><strong>  &amp; 
+ 정답(label)을 변경하기 위한 </strong><code>target_transform</code><strong> )를(을) 가짐
+학습을 하려면 정규화(normalize)된 텐서 형태의 특징(feature) &amp;
+ 원-핫(one-hot)으로 부호화(encode)된 텐서 형태의 정답(label)이 필요</strong></blockquote><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fa595b72-9af9-4c93-a1bb-4c514f35a7c2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>FashionMNIST 특징(feature)은 PIL Image 형식이며, 정답(label)은 정수(integer)</strong></div></figure><pre id="bd32f161-f9ca-4967-bfe2-24a315ade165" class="code"><code>import torch
+from torchvision import datasets
+from torchvision.transforms import ToTensor, Lamdba
+
+ds = datasets.FashionMNIST(
+		root = &#x27;data&#x27;,
+		train = True,
+		download = True, 
+		transform = ToTensor()
+		target_transform = Lamdba( lamdba y : torh.zeros(10, 
+															dtype=torch.float).scatter_(0,torch.tensor(y),
+															value=1))
+		)</code></pre><h3 id="15929c26-0fa1-494d-992e-a1f3b26e8baf" class="">ToTensor()</h3><p id="838fceea-9ba4-43b6-b023-9ee5f945fe6f" class="">: PIL Image 나 Numpy ndarray를 FloatTensor로 변환하고, 이미지의 픽셀의 크기(intensity) 값을 [0. , 1. ]범위로 비례하여 조정(scale) 함</p><h3 id="f70b2528-e0c5-4d5a-ab47-55ab82c58751" class="">Lamdba 변형</h3><p id="f6f0566b-2062-4c7b-ad8d-419fe45b93b9" class="">: 사용자 정의 람다 함수 적용
+: 정수를 원-핫으로 부호화된 텐서로 바꾸는 함수를 정의함
+: 크기 0짜리 zero텐서를 만들고, scatter_를 호출하여 정답 y 에 해당하는 인덱스에 value=1 할당</p></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3"><strong>Build the </strong>Neural Networks</summary><div class="indented"><p id="e0d26d8d-d52a-4432-9925-3c8372ce38dc" class="">
+</p><p id="6b221257-c065-4499-aaa3-f12bf78c6beb" class="">
+</p><p id="d74b64cb-9c23-43a4-b580-6bed85458140" class="">
+</p><p id="45717de1-da78-438e-9a35-803c59e1217e" class="">
+</p><p id="8f665080-7705-4387-b95c-65331f3ea1cf" class="">
+</p><p id="f7476e41-e663-4912-abb2-45d63e7fabb7" class="">
+</p><p id="6ee817fb-1809-44ba-a982-105984266e90" class="">
+</p><p id="983f3b79-85f0-450f-816d-bfde36696d29" class="">
+</p></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3">s</summary></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3">s</summary></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3">s</summary></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3">s</summary></details></div></article></body></html>

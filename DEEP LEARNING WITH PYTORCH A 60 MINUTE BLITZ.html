@@ -1,0 +1,1111 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DEEP LEARNING WITH PYTORCH : A 60 MINUTE BLITZ</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1baea6dd-bc9e-463a-ba0a-86e49c746715" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🦴</span></div><h1 class="page-title"><strong>DEEP LEARNING WITH PYTORCH : A 60 MINUTE BLITZ</strong></h1></header><div class="page-body"><p id="6dea95d8-cdd8-4db8-8535-2258370954fe" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3">Tensor</summary><div class="indented"><ul id="9c6394cb-b546-47c8-bc1e-9b206824a496" class="bulleted-list"><li style="list-style-type:disc">Numpy의 ndarray 혹은 Matrix(행렬)과 유사한 특수 자료구조</li></ul><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Tensor 초기화 하기</summary><div class="indented"><pre id="559b4c8c-1088-4355-ae9d-b3550598334b" class="code"><code>import torch
+import numpy as np
+
+# No.1 : 데이터로부터 직접(directly) 생성하기
+data = [[1,2],[3,4]]
+x_data = torch.tensor(data)
+
+# No.2 : Numpy 배열부터 생성하기
+np.array = np.array([data])
+x_np = torch.from_numpy(np_array)
+
+# No.3 : 다른 텐서로부터 생성하기
+# 직접 Override 하지않으면, shape과 datatype이 유지됨
+x_ones = torch.ones_like(x_data)                     # x_data의 속성을 유지함
+print(f&#x27;Ones Tensor : ]n {x_ones} \n&#x27;)
+
+x_rand = torch.rand_like(x_data, dtype=torch.float)  # x_data의 속성을 덮어씀
+print(f&#x27;Random Tensor : ]n {x_rand} \n&#x27;)
+
+# No.4 : 무작위(Random) or 상수(constant) 값 사용하기
+# shape은 텐서의 차원(dimension)을 나타내는 튜플
+
+shape = (2,3,)
+rand_tensor = torch.rand(shape)
+ones_tensor = torch.ones(shape)
+zeros_tensor = torch.zeros(shape)
+
+print(f&quot;Random Tensor: \n {rand_tensor} \n&quot;)
+print(f&quot;Ones Tensor: \n {ones_tensor} \n&quot;)
+print(f&quot;Zeros Tensor: \n {zeros_tensor}&quot;)</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Tensor 속성(Attribute)</summary><div class="indented"><p id="4c35cc61-c459-4950-80ad-12bf5c5f519b" class="">텐서의 모양(shape), 자료형(datatype) 및 어느 장치에 저장되는지를 나타냄</p><pre id="8d18c187-8bca-4b25-96f0-8b691c069f59" class="code"><code>tensor = torch.rand(3,4)
+
+print(f&quot;Shape of tensor: {tensor.shape}&quot;)
+print(f&quot;Datatype of tensor: {tensor.dtype}&quot;)
+print(f&quot;Device tensor is stored on: {tensor.device}&quot;)</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Tensor 연산(Operation)</summary><div class="indented"><p id="f98c9a4c-767b-4a08-a443-fc73dd8c8b44" class="">전치(Transposing), 인덱싱(Indexing), 슬라이싱(Slicing)
+수학계산, 선형대수, 임의 샘플링(Random sampling)등, 100가지 이상 연산 가능하며 <mark class="highlight-red"><a href="https://pytorch.org/docs/stable/torch.html">여기</a></mark>서 확인 가능</p><pre id="17559eb5-370e-4532-b027-310302cf6c2c" class="code"><code># GPU 사용 가능할 시 GPU 사용하기
+
+# GPU가 존재하면 텐서를 이동합니다
+if torch.cuda.is_available():
+  tensor = tensor.to(&#x27;cuda&#x27;)
+  print(f&quot;Device tensor is stored on: {tensor.device}&quot;)
+
+
+#  Numpy식 표준 인덱싱과 슬라이싱
+tensor = torch.ones(4,4)
+tensor[:,1] = 0
+print(tensor)
+
+# tensor 합치기
+# torch stack은 torch.cat과 미묘하게 다름
+t1 = torch.cat([tensor, tensor, tensor], dim=1)
+print(t1)
+
+t2 = torch.stack([tensor, tensor, tensor], dim=1)
+print(t2)
+
+# tesnor 곱하기
+# 요소 별(element-wise product) 계산
+tesor_mul1 = tensor.mul(tensor)
+print(f&quot;tensor.mul(tensor) \n {tesor_mul1} \n&quot;)
+tensor_mul2 = tensor*tensor
+print(f&quot;tensor * tensor \n {tensor_mul2}&quot;)
+
+# tensor 바꿔치기 (in-place)
+# _ 접미사를 갖는 연산들은 바꿔치기(in-place) 연산
+# 메모리를 일부 절약하지만, 원본data가 삭제되어, 도함수 계산에 문제 발생 할 수 있어, 사용 권장x
+print(tensor, &quot;\n&quot;)
+tensor.add_(5)
+print(tensor)
+</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Numpy 변환 (Bridge)</summary><div class="indented"><p id="ca02bcc7-ae23-44c8-8f5c-41d1c65ddb6f" class="">CPU 상의 텐서와 NumPy 배열은 메모리 공간을 공유하기 때문에, 하나를 변경하면 다른 하나도 변경됨</p><pre id="98eed3fb-c34b-406e-95d4-3637667cbe4f" class="code"><code>t = torch.ones(5)
+print(f&#x27;t = {t}&#x27;)
+n = t.numpy()
+print(f&#x27;n = {n}&#x27;)
+
+t.add_(1)
+print(f&#x27;t = {t}&#x27;)
+print(f&#x27;n = {n}&#x27;)</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Numpy → Tensor로 변환</summary><div class="indented"><pre id="01b4aa81-a2e8-4038-b11b-2f20f7dcf6cb" class="code"><code>n = np.ones(5)
+t = torch.from_numpy(n)
+
+# Numpy의 변경 사항이 Tensor에도 반영됨
+np.add(n, 1, out=n)
+print(f&quot;t: {t}&quot;)
+print(f&quot;n: {n}&quot;)
+</code></pre></div></details></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3">torch.autograd</summary><div class="indented"><ul id="497c33df-f9ac-4459-a95b-e353f813dd35" class="bulleted-list"><li style="list-style-type:disc"><code>torch.autograd</code><strong> 는 벡터-야코비안 곱을 계산하는 엔진</strong></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ae9d517f-5bc6-4252-9e57-6b7ddae8b2d4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">신경망의 학습 방법
+1. 순전파 (Forward Propagation)
+ - 값을 추측하기 위해 input data를 입력
+2. 역전파 (Backward Propagation)
+ - 추측한 값에서 발생한 오류에 비례하여 매개변수를 조절
+ - 출력으로부터 역방향으로 이동하며 함수 매개변수의 미분값을 수집하고, 경사하강법을 통해 최적화 실시
+ - 자세한 <a href="https://www.youtube.com/watch?v=tIeHLnjs5U8">영상은 참조</a></div></figure><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">사용법</summary><div class="indented"><p id="6a749c69-c1da-4e29-b57e-ff45902b7102" class="">여기에서는 <code>torchvision</code> 에서 미리 학습된 resnet18 모델을 불러옵니다. 3채널짜리 높이와 넓이가 64인 이미지 하나를 표현하는 무작위의 데이터 텐서를 생성하고, 이에 상응하는 <code>label(정답)</code> 을 무작위 값으로 초기화합니다. 미리 학습된 모델의 정답(label)은 (1, 1000)의 모양(shape)을 갖습니다.</p><pre id="a26c97e5-20fc-4a5f-a6fd-74ac7e963bf4" class="code"><code>import torch
+from torchvision.models import resnet18, ResNet18_Weights
+model = resnet18(weights=ResNet18_Weights.DEFAULT)
+data = torch.rand(1, 3, 64, 64)
+labels = torch.rand(1, 1000)
+
+# Forward Propagation
+# Input data를 layer에 통과시켜 Prediction을 얻는 과정
+prediction = model(data)
+
+# 오차(error, loss) 계산
+# 오차를 Backward Propagation 실시
+loss = (prediction - labels).sum()
+loss.backward()    # 역전파 시작
+
+# Optimizer 불러오기
+# 학습률(learning rate) 0.1과 모멤텀 0.9를 가진 SGD
+optim = torch.optim.SGD(model.parameters(), lr=1e-2, momentum=0.9)
+
+# 경사하강법 이용
+optim.step()
+</code></pre><p id="8d413abc-5ca9-4423-965d-0f7695c2999d" class="">
+</p></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Autograd에서 미분(Differentiation)</summary><div class="indented"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><code>autograd</code> 가 어떻게 <mark class="highlight-red">변화도(gradient)를 수집</mark>하는지 살펴보기</summary><div class="indented"><pre id="a312d43f-3f72-4efc-90cd-d8772cc3a3dd" class="code"><code>import torch
+
+# requires_grad = audograd의 모든 연산을 추적함
+a = torch.tensor([2., 3.], requires_grad=True)
+b = torch.tensor([6., 4.], requires_grad=True)
+
+Q = 3*a**3 - b**2
+
+# Q 에 대해서 .backward() 를 호출할 때
+# autograd는 이러한 변화도들을 계산하고 이를 각 텐서의 .grad 속성(attribute)에 저장
+external_grad = torch.tensor([1., 1.])
+Q.backward(gradient=external_grad)
+
+#변화도는 a.grad 와 b.grad 에 저장
+# 수집된 변화도가 올바른지 확인합니다.
+print(9*a**2 == a.grad)
+print(-2*b == b.grad)</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">선택적으로 읽기 (Optional Reading)
+- autograd를 사용한 벡터 미적문(calculus)</summary><div class="indented"><p id="7cee7581-4f1b-45ba-90ff-39be8b8417b9" class="">벡터 함수 <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>y</mi><mo>⃗</mo></mover><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mover accent="true"><mi>x</mi><mo>⃗</mo></mover><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{\vec y } = f({\vec x})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9084399999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.17994em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.20772em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> 에서 <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>x</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">{\vec x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.714em;vertical-align:0em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.20772em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>에 대한 <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>y</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">{\vec y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9084399999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.17994em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>의 변화도는 야코비안 행렬 <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mo>:</mo></mrow><annotation encoding="application/x-tex">J:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.09618em;">J</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span></span><span>﻿</span></span> 이다</p><p id="aab013c4-dcb8-4ff4-824b-25da3d988148" class="">일반적으로, <code>torch.autograd</code> 는 벡터-야코비안 곱을 계산하는 엔진</p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3"><strong>연산 그래프(Computational Graph)</strong></summary><div class="indented"><p id="fb93a564-1d9c-4cd9-9f87-3044b8311589" class="">autograd는 tensor에 실행된 모든 연산들(및 연산 결과가 새로운 텐서인 경우도 포함)의 기록을 Function 객체로 구성된 방향성 비순환 그래프(DAG)에 저장함.</p><p id="79a1fe6f-2198-44d9-bd4d-882c91bb21f4" class="">DAG의 잎(leaf)은 입력텐서이고, 뿌리(root)는 결과 텐서이며, 뿌리에서 잎까지 추적하면 연쇄법칙 (chain rule)에 따라 변화도를 자동으로 계산할 수 있음.</p><p id="92788538-1555-4613-bae7-495771ec5694" class="">
+</p><ol type="1" id="fb0f20ce-cce6-4a63-8fe8-82de022abf07" class="numbered-list" start="1"><li>순전파 단계에서의 autograd의 작업<ol type="a" id="33c1a501-742b-4701-b255-6f383c83f5d9" class="numbered-list" start="1"><li>요청된 연산을 수행하여 결과 텐서를 계산</li></ol><ol type="a" id="be44f047-0c70-46e8-b485-672108393fec" class="numbered-list" start="2"><li>DAG에 연산의 변화도 기능(gradient function)을 유지(maintain)</li></ol></li></ol><ol type="1" id="a37fb35c-cc03-4aa3-b091-ebc9ba3e4e69" class="numbered-list" start="2"><li>역전파 단계는 DAG의 뿌리에서 .backward()가 호출될때 시작.<ol type="a" id="1921a273-5445-4572-a4ab-5062ac0752dd" class="numbered-list" start="1"><li>각 .grad_fn 으로부터 변화도 계산</li></ol><ol type="a" id="3b072467-3acd-491e-841f-51496d3f43f6" class="numbered-list" start="2"><li>각 텐서의 .grad 속성에 계산 결과를 쌓고(accumulate)</li></ol><ol type="a" id="9d0f82a2-5d07-4b4b-8f4d-456e0a7a6702" class="numbered-list" start="3"><li>연쇄법칙(chain rule)을 사용하여 모든 잎(leaf) 텐서들까지 전파(propagation) 실시</li></ol></li></ol></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">DAG에서 제외 하기</summary><div class="indented"><p id="b135984b-cf7b-46fc-8f87-af180c2d36b8" class=""><strong><code>torch.autograd</code></strong><strong> 는 </strong><strong><code>requires_grad</code></strong><strong> 플래그(flag)가 </strong><strong><code>True</code></strong><strong> 로 설정된 모든 텐서에 대한 연산들을 추적합니다. 따라서 변화도가 필요하지 않은 텐서들에 대해서는 이 속성을 </strong><strong><code>False</code></strong><strong> 로 설정하여 DAG 변화도 계산에서 제외합니다.</strong></p><p id="779e254a-4459-4984-add1-f9c95a0be47c" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6bb2ede9-7526-4790-99d9-69dca1ea6352"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">신경망에서, 변화도를 계산하지 않는 매개변수를 일반적으로 <strong>고정된 매개변수(frozen parameter)</strong> 이라고 부릅니다. 
+이러한 매개변수의 변화도가 필요하지 않다는 것을 미리 알고 있으면, 
+신경망 모델의 일부를 《고정(freeze)》하는 것이 유용함.
+(이렇게 하면 autograd 연산량을 줄임으로써 성능 상의 이득을 제공합니다.)
+
+DAG에서 제외하는 것이 중요한 또 다른 일반적인 사례(usecase)는 <mark class="highlight-red"><strong><a href="https://tutorials.pytorch.kr/beginner/finetuning_torchvision_models_tutorial.html">미리 학습된 모델을 미세조정</a></strong></mark> 하는 경우입니다.</div></figure><pre id="498d8ecc-f2f0-4b23-9a7c-89a420cb9a2f" class="code"><code># 미리 학습된 모델의 미세조정
+
+from torch import nn, optim
+
+model = resnet18(weights=ResNet18_Weights.DEFAULT)
+
+# 신경망의 모든 매개변수를 고정합니다
+for param in model.parameters():
+    param.requires_grad = False
+
+# 10개의 정답(label)을 갖는 새로운 데이터셋으로 모델을 미세조정하는 상황을 가정
+# resnet에서 분류기(classifier)는 마지막 선형 계층(linear layer)인 model.fc
+# 이를 새로운 분류기로 동작할 (고정되지 않은) 새로운 선형 계층으로 간단히 대체
+model.fc = nn.Linear(512, 10)
+
+# 이제 model.fc 를 제외한 모델의 모든 매개변수들이 고정되었습니다.
+# 변화도를 계산하는 유일한 매개변수는 model.fc 의 가중치(weight)와 편향(bias)뿐
+
+# 분류기만 최적화합니다.
+optimizer = optim.SGD(model.parameters(), lr=1e-2, momentum=0.9)</code></pre></div></details></div></details></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3">Neural Networks</summary><div class="indented"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2906145d-7844-4256-8d86-c6b388bb7b70"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>신경망은 </strong><code>torch.nn</code><strong> 패키지를 사용하여 생성</strong><p id="09eb757f-632e-4f3e-804a-aa78fdd1728b" class=""><code>nn</code><strong> 은 모델을 정의하고 미분하는데 </strong><code>autograd</code><strong> 를 사용</strong></p><p id="dd1c3691-59a0-4b30-abb0-76debaa12d49" class=""><code>nn.Module</code><strong> 은 계층(layer)과 </strong><code>output</code><strong> 을 반환하는 </strong><code>forward(input)</code><strong> 메서드를 포함</strong></p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3298b736-b798-47fe-b630-e666c0c9f4e2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><code>torch.nn</code><strong> 은 미니배치(mini-batch)만 지원
+</strong><code>torch.nn</code><strong> 패키지 전체는 하나의 샘플이 아닌, 샘플들의 미니배치만을 입력 받음</strong></div></figure><p id="b384d274-2638-4e7e-85ad-fe06e72014e6" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e02f9154-6d71-4b5d-ab2b-8f4db3511e00"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">신경망의 일반적인 학습 과정
+<ul id="cc2740a2-31c1-43a8-ad0a-1b28790f1a26" class="bulleted-list"><li style="list-style-type:disc">학습 가능한 매개변수(또는 가중치(weight))를 갖는 신경망 정의</li></ul><ul id="d93021b7-7aca-41de-adb3-e5c780068e0b" class="bulleted-list"><li style="list-style-type:disc">데이터셋(dataset) 입력을 반복</li></ul><ul id="4aa1804f-1c0e-41c0-86dc-7d5a9343bd8b" class="bulleted-list"><li style="list-style-type:disc">입력을 신경망에서 전파(process)</li></ul><ul id="456bf1b0-4adc-4cce-89f9-50a321740a93" class="bulleted-list"><li style="list-style-type:disc">손실(loss; 출력이 정답으로부터 얼마나 떨어져 있는지)을 계산</li></ul><ul id="a9f2c518-6623-4ca0-8702-084c4c5905d9" class="bulleted-list"><li style="list-style-type:disc">변화도(gradient)를 신경망의 매개변수들에 역으로 전파</li></ul><ul id="8a715a29-c37d-4dfe-a1d9-a86f15e5a524" class="bulleted-list"><li style="list-style-type:disc">신경망의 가중치를 갱신합니다. 일반적으로 다음과 같은 간단한 규칙을 사용
+<code>새로운 가중치(weight) = 가중치(weight) - 학습률(learning rate) * 변화도(gradient)</code></li></ul></div></figure><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">신경망 정의</summary><div class="indented"><pre id="42992c26-d3a1-4d79-97ba-0dc9b3124349" class="code"><code>import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class Net(nn.Module):
+	def __init__(self) :
+		super(Net, self).__init__()
+		#입력 이미지 채널 1개, 출력 채널 6개, 5x5의 정사각 컨볼루션 행렬
+		#컨볼루션 커널 정의
+		self.conv1 = nn.Conv2d (1,6,5)
+		self.conv2 = nn.Conv2d(6,16,5)
+		#아핀(affine) 연산: y = Wx + b
+		self.fc1 = nn.Linear(16*5*5,120) #5*5는 이미지 차원에 해당
+		self.fc2 = nn.Linear(120,84)
+		self.fc3 = nn.Linear(84, 10)
+
+	def forward(self, x) :
+		# (2,2) 크기 윈도우에 대해 맥스 풀링(Max Pooling)
+		x = F.max_pool2d(F.relu(self.conv1(x)), (2,2))
+		# 크기가 제곱수라면, 하나의 숫자만을 특정(specify)
+		x = F.max_pool2d(F.relu(self.conv2(x)), 2)
+    x = torch.flatten(x, 1) # 배치 차원을 제외한 모든 차원을 하나로 평탄화(flatten)
+    x = F.relu(self.fc1(x))
+    x = F.relu(self.fc2(x))
+    x = self.fc3(x)
+    return x
+
+
+net = Net()
+print(net)</code></pre><p id="82ef04e4-0382-40dd-87a0-7e68728e2177" class=""><code>forward</code><strong> 함수만 정의하고 나면, (변화도를 계산하는) </strong><code>backward</code><strong> 함수는 </strong><code>autograd</code><strong> 를 사용하여 자동으로 정의</strong></p><p id="a6c41b06-e9e5-43ce-9b2f-a29d10bf4d5d" class=""><strong>모델의 학습 가능한 매개변수들은 </strong><code><strong>net.parameters()</strong></code><strong> 에 의해 반환됩니다.</strong></p><pre id="0ce505b9-9438-4322-b6ea-d3f564bf1fe1" class="code"><code>params = list(net.parameters())
+print(len(params)
+print(params[0].size())    # conv1의 .weight</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="059aa6d3-d5c9-4fca-a051-f3842bbad4e1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Note: 이 신경망(LeNet)의 예상되는 입력 크기는 32x32
+이 신경망에 MNIST 데이터셋을 사용하기 위해서는,
+데이터셋의 이미지 크기를 32x32로 변경해야 합니다</strong></div></figure><pre id="ab0a2be8-1e76-413f-a2d6-99cdd3f72126" class="code"><code>input = torch.randn(1, 1, 32, 32)
+out = net(input)
+print(out)</code></pre><p id="2be48d03-26fa-4d60-9f92-549a86486491" class=""><strong>모든 매개변수의 변화도 버퍼(gradient buffer)를 0으로 설정하고, 무작위 값으로 역전파를 합니다</strong></p><pre id="b95ef094-7bbb-48f9-897c-230f5e6725bb" class="code"><code>net.zero_grad()
+out.backward(torch.randn(1, 10))</code></pre><p id="ec28c37b-1ff5-4f4e-8b4f-46d3cfa1a13a" class="">
+</p></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">손실 함수 (loss function)</summary><div class="indented"><p id="e50a0f98-95e9-4fa4-92f6-7bfa6a923df5" class="">출력(output) 및 정답(target)을 한 쌍으로 입력받아, 출력(output)이 정답(target)과 얼마나 떨어져 있는지 추정하는 값을 계산</p><ul id="6ccc24fd-7005-481c-97b8-dd7caecab8f6" class="bulleted-list"><li style="list-style-type:disc"><strong>nn 패키지에는 여러가지의 </strong><a href="http://pytorch.org/docs/nn.html#loss-functions">손실 함수들</a><strong> 이 존재</strong></li></ul><pre id="f8a221b7-9809-42e8-96ac-7022be5e904a" class="code"><code># 예시) 평균제곱오차 (Mean-squared erro) - nn.MSEloss
+
+output = net(input)
+target = torch.randn(10)  # 예시를 위한 임의의 정답
+target = target.view(1, -1)  # 출력과 같은 shape로 만듦
+criterion = nn.MSELoss()
+
+loss = criterion(output, target)
+print(loss)</code></pre><p id="2ca80be4-b08c-4123-92b3-64d69fe43bdc" class=""><code>.grad_fn</code><strong> 속성을 사용하여 </strong><code>loss</code><strong> 를 역방향에서 따라가 연산 그래프를 보기</strong></p><blockquote id="71b2af31-e219-47a0-8c43-54d0abb60109" class="">input→conv2d→relu→maxpool2d→conv2d→relu→maxpool2d
+         →flatten→linear→relu→linear→relu→linear→MSELoss
+         →loss</blockquote><p id="4c7f6c98-5a90-457d-adfc-3aca3914ffea" class="">
+</p></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">역전파 (back propagation)</summary><div class="indented"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e1326c81-ddaa-410b-a72a-389d2851d1b7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>오차(error)를 역전파하기 위해서는 </strong><strong><code>loss.backward()</code></strong><strong> 실시</strong></div></figure><pre id="e59813fe-3b5f-4805-9264-688d09df5a8b" class="code"><code># 역전파 전과 후에 conv1의 bias 변수의 변화도 확인
+net.zero_grad()     # 모든 매개변수의 변화도 버퍼를 0으로 만듦
+
+print(&#x27;conv1.bias.grad before backward&#x27;)
+print(net.conv1.bias.grad)
+
+loss.backward()
+
+print(&#x27;conv1.bias.grad after backward&#x27;)
+print(net.conv1.bias.grad)</code></pre></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">가중치 갱신</summary><div class="indented"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b402ed9d-67ea-4c0b-b212-5790edba8efe"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><code>optimizer.zero_grad()</code><strong> 를 사용하여 수동으로 변화도 버퍼를 0으로 설정하는 것에 유의</strong></div></figure><ul id="4ffb31d7-076c-4d06-a310-45b4536db6e4" class="bulleted-list"><li style="list-style-type:disc">가장 단순한 갱신규칙 : 확률적 경사하강법 (SGD: Stochastic Gradient Descent)<ul id="2c97d5f1-af99-474b-bb2b-6e67dbd2ac33" class="bulleted-list"><li style="list-style-type:circle"><code><strong>새로운 가중치(weight) = 가중치(weight) - 학습률(learning rate) * 변화도(gradient)</strong></code></li></ul><pre id="8ea84394-f3bd-414e-81c8-937d68f44451" class="code"><code>learning_rate = 0.01
+for f in net.parameters():
+    f.data.sub_(f.grad.data * learning_rate)</code></pre></li></ul><ul id="6f743fdd-c817-4c51-9c2e-685bdf6e63c7" class="bulleted-list"><li style="list-style-type:disc">torch.optim에 SGD, Nesterov-SGD, Adam, RMSProp 등과 같은 다양한 갱신 규칙 있음</li></ul><pre id="07ca545f-9ef9-4378-939f-a701c2b25cda" class="code"><code>import torch.optim as optim
+
+# Optimizer를 생성합니다.
+optimizer = optim.SGD(net.parameters(), lr=0.01)
+
+# 학습 과정(training loop)은 다음과 같습니다:
+optimizer.zero_grad()   # 변화도 버퍼를 0으로
+output = net(input)
+loss = criterion(output, target)
+loss.backward()
+optimizer.step()    # 업데이트 진행</code></pre></div></details></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3">Classifier 학습하기</summary><div class="indented"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3">데이터 불러오기</summary><div class="indented"><p id="a1fc423a-4f46-443b-8dda-82b9e882ec1d" class=""><strong>일반적으로 이미지나 텍스트, 오디오나 비디오 데이터를 다룰 때는 표준 Python 패키지를 이용하여 NumPy 배열로 불러오면 됩니다. 그 후 배열을 </strong><code><strong>torch.*Tensor</strong></code><strong> 로 변환합니다.</strong></p><p id="91115e47-9dd7-4f2a-8b58-163e797ea6fb" class="">
+</p><ul id="03b56e34-3c9d-4c37-90e7-99b5dcbf9324" class="bulleted-list"><li style="list-style-type:disc"><strong>이미지는 Pillow나 OpenCV 같은 패키지가 유용합니다.</strong></li></ul><ul id="af1b2035-38ad-4e7e-8d3b-27992fc090bc" class="bulleted-list"><li style="list-style-type:disc"><strong>오디오를 처리할 때는 SciPy와 LibROSA가 유용하고요.</strong></li></ul><ul id="4148a06f-0a66-4a1c-a89d-a9f163544684" class="bulleted-list"><li style="list-style-type:disc"><strong>텍스트의 경우에는 그냥 Python이나 Cython을 사용해도 되고, NLTK나 SpaCy도 유용합니다.</strong></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">cifar10  학습하기</summary><div class="indented"><blockquote id="4ee93541-6dd7-419e-ac63-3d7423700720" class=""><strong>진행 순서</strong><ol type="1" id="9148e699-23c3-4646-addd-d24fe50b185d" class="numbered-list" start="1"><li><code><strong>torchvision</strong></code><strong> 을 사용하여 CIFAR10의 학습용 / 시험용 데이터셋을 불러오고, 정규화(nomarlizing)합니다.</strong></li></ol><ol type="1" id="0d037352-fb63-4021-804f-487e03a0f34b" class="numbered-list" start="2"><li><strong>합성곱 신경망(Convolution Neural Network)을 정의합니다.</strong></li></ol><ol type="1" id="a83a5738-057f-4e94-9099-f760a5aa0073" class="numbered-list" start="3"><li><strong>손실 함수를 정의합니다.</strong></li></ol><ol type="1" id="1c277850-ea56-411c-8925-90f6b2928d61" class="numbered-list" start="4"><li><strong>학습용 데이터를 사용하여 신경망을 학습합니다.</strong></li></ol><ol type="1" id="c31f580a-1dd4-4c3c-9d84-405da7fb4ab3" class="numbered-list" start="5"><li><strong>시험용 데이터를 사용하여 신경망을 검사합니다.</strong></li></ol></blockquote><pre id="10cae0d0-eef2-4de8-8797-931edfcb93ef" class="code"><code># No.1 : import dataset &amp; nomarlizing
+import torch
+import torchvision
+import torchvision.transforms as transforms
+
+# torchvision 데이터셋의 출력(output)은 [0, 1] 범위를 갖는 PILImage 이미지
+# 이를 [-1, 1]의 범위로 정규화된 Tensor로 변환
+transform = transforms.Compose(
+    [transforms.ToTensor(),
+     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
+batch_size = 4
+
+trainset = torchvision.datasets.CIFAR10(root=&#x27;./data&#x27;, train=True,
+                                        download=True, transform=transform)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
+                                          shuffle=True, num_workers=2)
+
+testset = torchvision.datasets.CIFAR10(root=&#x27;./data&#x27;, train=False,
+                                       download=True, transform=transform)
+testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
+                                         shuffle=False, num_workers=2)
+
+classes = (&#x27;plane&#x27;, &#x27;car&#x27;, &#x27;bird&#x27;, &#x27;cat&#x27;,
+           &#x27;deer&#x27;, &#x27;dog&#x27;, &#x27;frog&#x27;, &#x27;horse&#x27;, &#x27;ship&#x27;, &#x27;truck&#x27;)
+
+
+# Image 정상적으로 들어왔는지 확인하기
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 이미지를 보여주기 위한 함수
+
+def imshow(img):
+    img = img / 2 + 0.5     # unnormalize
+    npimg = img.numpy()
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))
+    plt.show()
+
+
+# 학습용 이미지를 무작위로 가져오기
+dataiter = iter(trainloader)
+images, labels = next(dataiter)
+
+# 이미지 보여주기
+imshow(torchvision.utils.make_grid(images))
+# 정답(label) 출력
+print(&#x27; &#x27;.join(f&#x27;{classes[labels[j]]:5s}&#x27; for j in range(batch_size)))
+
+
+# No.2 : 합성곱(CNN) 정의하기
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+class Net(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(3, 6, 5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(6, 16, 5)
+        self.fc1 = nn.Linear(16 * 5 * 5, 120)
+        self.fc2 = nn.Linear(120, 84)
+        self.fc3 = nn.Linear(84, 10)
+
+    def forward(self, x):
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = torch.flatten(x, 1) # 배치를 제외한 모든 차원을 평탄화(flatten)
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x
+
+
+net = Net()
+
+
+# No.3 : 손실함수와 Optimizer 정의
+# 교차 엔트로피 손실(Cross-Entropy loss)과 모멘텀(momentum) 값을 갖는 SGD를 사용.
+import torch.optim as optim
+
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+
+
+# No.4 : 신경망 학습하기
+# 데이터를 반복해서 신경망에 입력으로 제공하고, 최적화(Optimize) 진행
+for epoch in range(2):   # 데이터셋을 수차례 반복합니다.
+
+    running_loss = 0.0
+    for i, data in enumerate(trainloader, 0):
+        # [inputs, labels]의 목록인 data로부터 입력을 받은 후;
+        inputs, labels = data
+
+        # 변화도(Gradient) 매개변수를 0으로 만들고
+        optimizer.zero_grad()
+
+        # 순전파 + 역전파 + 최적화를 한 후
+        outputs = net(inputs)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
+
+        # 통계를 출력합니다.
+        running_loss += loss.item()
+        if i % 2000 == 1999:    # print every 2000 mini-batches
+            print(f&#x27;[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 2000:.3f}&#x27;)
+            running_loss = 0.0
+
+print(&#x27;Finished Training&#x27;)
+
+
+# 학습한 모델을 저장
+# 자세한 저장 방법 : https://pytorch.org/docs/stable/notes/serialization.html
+PATH = &#x27;./cifar_net.pth&#x27;
+torch.save(net.state_dict(), PATH)
+
+
+# No.5 : Test 로 검증하기
+# 1. test data 확인
+dataiter = iter(testloader)
+images, labels = next(dataiter)
+
+# 이미지를 출력합니다.
+imshow(torchvision.utils.make_grid(images))
+print(&#x27;GroundTruth: &#x27;, &#x27; &#x27;.join(f&#x27;{classes[labels[j]]:5s}&#x27; for j in range(4)))
+
+# 저장했던 모델을 불러오기
+net = Net()
+net.load_state_dict(torch.load(PATH))
+
+# Test 실시
+outputs = net(images)
+# 어떤 분류에 대해서 더 높은 값이 나타난다는 것은,
+# 신경망이 그 이미지가 해당 분류에 더 가깝다고 생각한다는 것
+_, predicted = torch.max(outputs, 1)
+
+print(&#x27;Predicted: &#x27;, &#x27; &#x27;.join(f&#x27;{classes[predicted[j]]:5s}&#x27;
+                              for j in range(4)))
+
+# 전체 데이터셋에 대해서는 어떻게 동작하는지 확인
+correct = 0
+total = 0
+# 학습 중이 아니므로, 출력에 대한 변화도를 계산할 필요가 없습니다
+with torch.no_grad():
+    for data in testloader:
+        images, labels = data
+        # 신경망에 이미지를 통과시켜 출력을 계산합니다
+        outputs = net(images)
+        # 가장 높은 값(energy)를 갖는 분류(class)를 정답으로 선택하겠습니다
+        _, predicted = torch.max(outputs.data, 1)
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
+
+print(f&#x27;Accuracy of the network on the 10000 test images: {100 * correct // total} %&#x27;)
+
+
+#잘 분류한것과 못한것 확인 절차
+# 각 분류(class)에 대한 예측값 계산을 위해 준비
+correct_pred = {classname: 0 for classname in classes}
+total_pred = {classname: 0 for classname in classes}
+
+# 변화도는 여전히 필요하지 않습니다
+with torch.no_grad():
+    for data in testloader:
+        images, labels = data
+        outputs = net(images)
+        _, predictions = torch.max(outputs, 1)
+        # 각 분류별로 올바른 예측 수를 모읍니다
+        for label, prediction in zip(labels, predictions):
+            if label == prediction:
+                correct_pred[classes[label]] += 1
+            total_pred[classes[label]] += 1
+
+
+# 각 분류별 정확도(accuracy)를 출력합니다
+for classname, correct_count in correct_pred.items():
+    accuracy = 100 * float(correct_count) / total_pred[classname]
+    print(f&#x27;Accuracy for class: {classname:5s} is {accuracy:.1f} %&#x27;)</code></pre><h3 id="401bdbb6-8b8c-441e-a710-4db107ec7677" class="">GPU에서 학습하기</h3><pre id="61ffdf8b-d12c-46fe-8828-10b1faa7828c" class="code"><code>device = torch.device(&#x27;cuda:0&#x27; if torch.cuda.is_available() else &#x27;cpu&#x27;)
+# CUDA 기기가 존재한다면, 아래 코드가 CUDA 장치를 출력합니다:
+print(device)
+
+
+# 메소드(Method)들은 재귀적으로 모든 모듈의 매개변수와 버퍼를 CUDA tensor로 변경
+net.to(device)
+
+# 각 단계에서 입력(input)과 정답(target)도 GP로 전송
+inputs, labels = data[0].to(device), data[1].to(device)</code></pre><p id="49e94787-07cb-480d-8653-0c9461be7e94" class="">모든 GPU를 활용해서 더욱 더 속도를 올리고 싶다면, 
+<a href="https://tutorials.pytorch.kr/beginner/blitz/data_parallel_tutorial.html">선택 사항: 데이터 병렬 처리 (Data Parallelism)</a> 을 참고 할 것</p><p id="a3b733fc-1800-4735-adf7-e514372127b7" class="">
+</p></div></details></div></details></div></article></body></html>
